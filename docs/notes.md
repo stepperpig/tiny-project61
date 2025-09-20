@@ -82,7 +82,17 @@ fastapi. on the server-side we could just use javascript fetch api.
 we should keep our goal within view... ultimately we want to display various
 visualizations. but for now we should take a tiny step back and focus on 
 implementing our ngramviewer. 
+
 we want to be able to input a list of words into a text box, press a button
 to generate a D3 visualization. we could easily draw a visualization on our
 client side. but how do we interact with our python backend? we send
-our list of unigrams to... where, again?
+our list of unigrams as an api request. we could use axios for handling this
+frontend-to-backend exchange.
+
+let's think about the backend. how do we construct our ngrammaps? do we 
+instantiate with a static local file? for now we'll feed our ngrammap a 
+single file. we'll parse our csv data stores into dictionaries that map 
+words to timeseries. we'll also define some class methods that compute 
+timeseries based on our specifications. this will essentially be the main 
+object we use to generate the correct timeseries. 
+
