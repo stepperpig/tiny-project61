@@ -13,7 +13,7 @@ class Server():
 
     # handle the get request
     def register(self, url, nqh):
-        
+        return 
         
 
     def start(self):
