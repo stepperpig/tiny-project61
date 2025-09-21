@@ -16,7 +16,7 @@ class Node:
             return self._is_red
 
 
-class RedBlackMap(Map):
+class RedBlackMap:
     """A dictionary implemented using a binary search tree."""
 
     def __init__(self):

@@ -1,24 +1,32 @@
 import pandas
-from redblacktree.rbtree import RBTree 
+from typing import overload
+from redblacktree.rbtree import RedBlackMap
 
 # We need to implement a Red-Black-Tree to replicate
 # a TreeMap.
-class TimeSeries(RBTree):
+class TimeSeries(RedBlackMap):
     min_year = 1400
     max_year = 2100
 
-    def __init__(self):
-        super().__init__()
-
-    def __init__(self, ts, startYear, endYear):
-        super().__init__()
-        if startYear > endYear:
-            raise ValueError("Can't be greater than a year that doesn't exist!")
+    def __init__(self, *args):
+        if len(args) == 0:
+            super().__init__()
         else:
-            for 
+            super().__init__()
+            ts = args[0]
+            startYear = args[1]
+            endYear = args[2]
+            if startYear > endYear:
+                raise ValueError("something went wrong")
+            else:
+                for key in ts:
+                    if (startYear <= key) and (key <= endYear):
+                        x = self.get(key)
+                        self.put(key, x)
 
     def years(self):
         years = [] 
-        for year in self.keySet():
+        for year in self:
             years.append(year)
+
         return years
