@@ -10,6 +10,13 @@ class TimeSeries(RBTree):
     def __init__(self):
         super().__init__()
 
+    def __init__(self, ts, startYear, endYear):
+        super().__init__()
+        if startYear > endYear:
+            raise ValueError("Can't be greater than a year that doesn't exist!")
+        else:
+            for 
+
     def years(self):
         years = [] 
         for year in self.keySet():
