@@ -4,7 +4,7 @@ $(function() {
 
 	var host;
 
-    host = 'http://localhost:4567/static/ngordnet_2a.html'; // Establish a connection to host
+    host = 'http://localhost:4567'; // Establish a connection to host
 
     // Create URLs 
     const history_server = host + '/history';
@@ -16,7 +16,7 @@ $(function() {
             words: document.getElementById('words').value,
             startYear: document.getElementById('start').value,
             endYear: document.getElementById('end').value,
-            k: document.getElementById('k').value
+            // k: document.getElementById('k').value
         }
     }
 
@@ -57,7 +57,7 @@ $(function() {
         var params = get_params();
         console.log(params);
         $.get({
-            // async: false, 
+            //async: false, 
             url: historytext_server,
             data: params,
             success: function(data) {

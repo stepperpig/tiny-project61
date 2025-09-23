@@ -12,11 +12,11 @@ from pathlib import Path
 class Server():
     def __init__(self):
         self.app = web.Application()
-
         root = self._get_project_root()
 
-        self.app.add_routes([web.static('/static', os.path.join(root, 'static'))])
-        self.app.add_routes([web.get('', self._get_data)])
+        self.app.router.add_get('/historytext', self._handle_history_text)
+        self.app.add_routes([web.static('/', os.path.join(root, 'static/'), show_index=True)])
+        self.app.router.add_get('/', self._serve_index)
 
         cors = aiohttp_cors.setup(self.app, defaults={
             "*": aiohttp_cors.ResourceOptions(
@@ -30,15 +30,27 @@ class Server():
             cors.add(route)
 
     async def _get_data(self, request):
+        query_params = request.rel_url.query
+        words_str = query_params.get('words')
         request_data = {
-            "url": str(request.url),
+            "message": "send from aiohttp",
+            "received": words_str 
         }
-        serialized_request = json.dumps(request_data)
-        print(serialized_request)
+        print(request_data)
         return web.Response()
 
     def _get_project_root(self) -> Path:
         return Path(__file__).parent.parent
+    
+    async def _handle_history_text(self, request):
+        word_str = request.query.get('words')
+        print(word_str)
+        word_list = word_str.split(',')
+        return web.json_response({'words': word_list},
+                                 status=200)
+
+    async def _serve_index(self, request):
+        return web.HTTPFound('/static/ngordnet_2a.html')
 
     def start(self):
-        web.run_app(self.app, port=4567)
+        web.run_app(self.app, host='localhost', port=4567)
