@@ -29,24 +29,16 @@ class Server():
         for route in list(self.app.router.routes()):
             cors.add(route)
 
-    async def _get_data(self, request):
-        query_params = request.rel_url.query
-        words_str = query_params.get('words')
-        request_data = {
-            "message": "send from aiohttp",
-            "received": words_str 
-        }
-        print(request_data)
-        return web.Response()
-
     def _get_project_root(self) -> Path:
         return Path(__file__).parent.parent
     
     async def _handle_history_text(self, request):
         word_str = request.query.get('words')
-        print(word_str)
         word_list = word_str.split(',')
-        return web.json_response({'words': word_list},
+
+        startYear = request.query.get('startYear')
+        endYear = request.query.get('endYear')
+        return web.json_response({'words': word_list, 'startYear': int(startYear), 'endYear': int(endYear)},
                                  status=200)
 
     async def _serve_index(self, request):
