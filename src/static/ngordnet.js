@@ -4,7 +4,7 @@ $(function() {
 
 	var host;
 
-    host = 'http://localhost:4567'; // Establish a connection to host
+    host = 'http://localhost:4567/static/ngordnet_2a.html'; // Establish a connection to host
 
     // Create URLs 
     const history_server = host + '/history';
