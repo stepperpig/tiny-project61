@@ -21,7 +21,7 @@ class TimeSeries(RedBlackMap):
             else:
                 for key in ts:
                     if (startYear <= key) and (key <= endYear):
-                        x = self.get(key)
+                        x = ts.get(key)
                         self.put(key, x)
 
     def years(self):
