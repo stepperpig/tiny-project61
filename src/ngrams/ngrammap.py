@@ -30,5 +30,11 @@ class NGramMap():
             self.COUNTS[counts_df['year'][i]] = counts_df['total'][i]
 
     def print(self):
-        print(len(self.MAP))
-        #print(len(self.COUNTS))
+        print(self.MAP)
+
+    def words(self):
+        # get all keys of the dict
+        return self.MAP.keys()
+
+    def histories(self):
+        return self.MAP.values()

@@ -26,8 +26,8 @@ class TimeSeriesTest(unittest.TestCase):
 
         newBigCatPopulation = TimeSeries(bigcatPopulation, 1992, 1995)
 
-        expectedYears = [1992, 1994, 1995]
-        self.assertEqual(newBigCatPopulation.years(), expectedYears)
+        expectedYears = [100.0, 200.0, 100.0]
+        self.assertEqual(newBigCatPopulation.data(), expectedYears)
 
 if __name__ == "__main__":
     unittest.main()

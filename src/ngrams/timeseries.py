@@ -30,3 +30,10 @@ class TimeSeries(RedBlackMap):
             years.append(year)
 
         return years
+
+    def data(self):
+        data = []
+        for key in self:
+            x = self.get(key)
+            data.append(x)
+        return data
