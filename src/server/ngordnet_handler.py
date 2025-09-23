@@ -4,7 +4,7 @@ class QueryHandler:
     def __init__(self):
         pass
 
-    async def index_handler(request):
+    def serve(self, filename):
         return web.FileResponse('./static/ngordnet_2a.html')
 
     def _strtolist(self, s):
@@ -17,4 +17,4 @@ class QueryHandler:
         words = self._strtolist(s)
         startYear = data.get('startYear')
         endYear = data.get('endYear')
-        return web.Response()
+        return web.Response(text=startYear)

@@ -1,3 +1,5 @@
 tinybox/
 *__init__.py
 __pycache__/
+.DS_Store
+src/.DS_Store
