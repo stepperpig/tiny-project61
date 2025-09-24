@@ -65,3 +65,26 @@ class TimeSeries(RedBlackMap):
                     sum.put(i, tmp1 + tmp2)
             i += 1
         return sum
+
+    def dividedBy(self, ts):
+        quotient = TimeSeries()
+        if len(self.years()) == 0 and len(ts.years()) == 0:
+            return quotient
+        startYear = min(self.firstKey(), ts.firstKey())
+        endYear = max(self.lastKey(), ts.lastKey())
+
+        i = startYear
+        while i <= endYear:
+            if self.get(i) is None:
+                if ts.get(i):
+                    i += 1
+                    continue
+            else:
+                if ts.get(i) is None:
+                    raise ValueError("invalid value")
+                else:
+                    tmp1 = self.get(i)
+                    tmp2 = ts.get(i)
+                    quotient.put(i, tmp1 / tmp2)
+            i += 1
+        return quotient
