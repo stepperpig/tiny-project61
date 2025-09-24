@@ -26,16 +26,22 @@ class TimeSeries(RedBlackMap):
                         self.put(key, x)
 
     def years(self):
-        years = [] 
+        years = []
+        print(self)
         for year in self:
+            print(year)
+            #years = year.tolist()
             years.append(year)
         return years
 
     def data(self):
         data = []
-        for key in self:
-            x = self.get(key)
-            data.append(x)
+        years = self.years()
+        indices = []
+        for year in self:
+            # print(year.index)
+            print(self.get(year))
+            data.append(self.get(year))
         return data
     
     def plus(self, ts):

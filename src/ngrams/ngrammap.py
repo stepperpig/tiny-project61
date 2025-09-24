@@ -1,6 +1,17 @@
 from collections import defaultdict
 from ngrams.timeseries import TimeSeries
 import pandas as pd
+import pyarrow
+
+
+def custom_func(x):
+        print(x['appearances'])
+        year_list = x['year'].tolist()
+        count_list = x['appearances'].tolist()
+        ts = TimeSeries()
+        for i in range(len(year_list)):
+            ts.put(year_list[i], count_list[i])
+        return ts
 
 class NGramMap():
 
@@ -12,23 +23,34 @@ class NGramMap():
         self._parse_words(wfile)
         self._parse_counts(cfile)
 
+    
+
     def _parse_words(self, wfile):
         words_df = pd.read_csv(wfile, sep='\t', header=None, 
-                               usecols=[0,1,2], names=['word', 'year', 'appearances'])
-        # we have to iterate through this entire dataframe and 
-        # insert into MAP
-        n = len(words_df['word'])
-        for i in range(n):
-            word = words_df['word'][i]
-            year = int(words_df['year'][i])
-            appearances = float(words_df['appearances'][i])
-            if self.MAP[word] is None:
-                ts = TimeSeries()
-                ts.put(year, appearances)
-                self.MAP[word] = ts
-            else:
-                ts = self.MAP[word]
-                ts.put(year, appearances)
+                               usecols=[0,1,2], names=['word', 'year', 'appearances'], engine="pyarrow")
+
+        # g = words_df.groupby('word').apply(lambda x: list(zip(x['year'], x['appearances']))).to_dict()
+
+        g = words_df.groupby(by=['word']).apply(custom_func).to_dict()
+
+        self.MAP = g
+
+        print(self.MAP)
+
+        # # we have to iterate through this entire dataframe and 
+        # # insert into MAP
+        # n = len(words_df['word'])
+        # for i in range(n):
+        #     word = words_df['word'][i]
+        #     year = int(words_df['year'][i])
+        #     appearances = float(words_df['appearances'][i])
+        #     if self.MAP[word] is None:
+        #         ts = TimeSeries()
+        #         ts.put(year, appearances)
+        #         self.MAP[word] = ts
+        #     else:
+        #         ts = self.MAP[word]
+        #         ts.put(year, appearances)
         
     def _parse_counts(self, cfile):
         counts_df = pd.read_csv(cfile, sep=',', header=None,

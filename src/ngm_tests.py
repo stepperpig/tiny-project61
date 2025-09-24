@@ -8,7 +8,12 @@ class NGramMapTest(unittest.TestCase):
     def testCountHistory(self):
         short_words_file = "/Users/kaiwenli/Documents/projects/skeleton-sp24/data/ngrams/very_short.csv"
         total_counts_file = "/Users/kaiwenli/Documents/projects/skeleton-sp24/data/ngrams/total_counts.csv"
-        ngm = NGramMap(short_words_file, total_counts_file)
+
+        # alternate user
+        wf = "/Users/I764248/Downloads/data/ngrams/very_short.csv"
+        cf = "/Users/I764248/Downloads/data/ngrams/total_counts.csv"
+
+        ngm = NGramMap(wf, cf)
 
         expectedYears = [2005, 2006, 2007, 2008]
         expectedCounts = [646179.0, 677820.0, 697645.0, 795265.0]
@@ -33,11 +38,18 @@ class NGramMapTest(unittest.TestCase):
         top_14337_words_file = "/Users/kaiwenli/Documents/projects/skeleton-sp24/data/ngrams/top_14377_words.csv"
         total_counts_file = "/Users/kaiwenli/Documents/projects/skeleton-sp24/data/ngrams/total_counts.csv"
 
-        ngm1 = NGramMap(top_14337_words_file, total_counts_file)
-        fishCount = ngm1.countHistory("fish", 1850, 1933)
+        wf = "/Users/I764248/Downloads/data/ngrams/top_14377_words.csv"
+        cf = "/Users/I764248/Downloads/data/ngrams/total_counts.csv"
+
+        ngm = NGramMap(wf, cf)
+
+        fishCount = ngm.countHistory("fish", 1850, 1933)
         self.assertTrue(math.isclose(fishCount.get(1865), 136497.0, rel_tol=1e-10))
         self.assertTrue(math.isclose(fishCount.get(1922), 444924.0, rel_tol=1e-10))
 
 
 if __name__ == "__main__":
-    unittest.main()
+    suite = unittest.TestSuite()
+    suite.addTest(NGramMapTest('testCountHistory'))
+    runner = unittest.TextTestRunner()
+    runner.run(suite)
