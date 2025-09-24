@@ -50,6 +50,6 @@ class NGramMapTest(unittest.TestCase):
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
-    suite.addTest(NGramMapTest('testCountHistory'))
+    suite.addTest(NGramMapTest('testOnLargeFile'))
     runner = unittest.TextTestRunner()
     runner.run(suite)
