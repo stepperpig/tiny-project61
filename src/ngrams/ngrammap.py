@@ -36,7 +36,9 @@ class NGramMap():
                                 dtype={'year': 'int16', 'total': 'float32'})
         n = len(counts_df['year'])
         for i in range(n):
-            self.COUNTS[counts_df['year'][i]] = counts_df['total'][i]
+            year = int(counts_df['year'][i])
+            total = float(counts_df['total'][i])
+            self.COUNTS[year] = total
 
     def countHistory(self, *args):
         if len(args) == 1:
@@ -50,7 +52,7 @@ class NGramMap():
             if self.MAP.get(args[0]) is None:
                 return ts
             ts = self.MAP.get(args[0])
-            bounded_ts = TimeSeries(ts, args[0], args[1])
+            bounded_ts = TimeSeries(ts, args[1], args[2])
             return bounded_ts
     
     def totalCountHistory(self):
