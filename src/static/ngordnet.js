@@ -57,20 +57,13 @@ $(function() {
         var params = get_params();
         console.log(params);
         $.get({
-            //async: false, 
             url: historytext_server,
             data: params,
             success: function(data) {
-            	console.log(`data: ${data.words}`)
-
+            	console.log(data)
                 res = JSON.stringify(data)
-
                 console.log(res)
-
                 textresult.value = res;
-
-
-
             },
             error: function(data) {
             	console.log(`error trying to access ${historytext_server}`)

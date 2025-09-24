@@ -6,55 +6,51 @@ from aiohttp.web_response import Response
 import os
 from pathlib import Path
 
-# routes = web.RouteTableDef()
-
 class Server():
     def __init__(self):
         self.app = web.Application()
-        root = self._get_project_root()
+        # root = self._get_project_root()
 
-        self.app.router.add_get('/historytext', self._handle_history_text)
-        self.app.add_routes([web.static('/', os.path.join(root, 'static/'), show_index=True)])
-        self.app.router.add_get('/', self._serve_index)
+        # self.app.router.add_get('/historytext', self._handle_history_text)
+        # self.app.add_routes([web.static('/', os.path.join(root, 'static/'), show_index=True)])
+        # self.app.router.add_get('/', self._serve_index)
 
+        # # set CORS policy
+        # cors = aiohttp_cors.setup(self.app, defaults={
+        #     "*": aiohttp_cors.ResourceOptions(
+        #         allow_credentials=True,
+        #         expose_headers="*",
+        #         allow_headers="*",
+        #         allow_methods=["GET", "POST", "PUT", "DELETE"]
+        #     )
+        # })
+        # # set CORS for all routes in list
+        # for route in list(self.app.router.routes()):
+        #     cors.add(route)
 
-        cors = aiohttp_cors.setup(self.app, defaults={
-            "*": aiohttp_cors.ResourceOptions(
-                allow_credentials=True,
-                expose_headers="*",
-                allow_headers="*",
-                allow_methods=["GET", "POST", "PUT", "DELETE"]
-            )
-        })
-        for route in list(self.app.router.routes()):
-            cors.add(route)
-
-    def _get_project_root(self) -> Path:
-        return Path(__file__).parent.parent
+    # helper to find project root
+    # def _get_project_root(self) -> Path:
+    #     return Path(__file__).parent.parent
     
-    async def _handle_history_text(self, request):
-        word_str = request.query.get('words')
-        word_list = word_str.split(',')
+    # async def _handle_history_text(self, request):
+    #     # get words
+    #     word_str = request.query.get('words')
+    #     word_list = word_str.split(',')
+    #     # get start and end years
+    #     startYear_returned = request.query.get('startYear')
+    #     startYear = int(startYear_returned)
+    #     endYear_returned = request.query.get('endYear')
+    #     endYear = int(endYear_returned)
+    #     # load into json object
+    #     json_obj = {
+    #         "words": word_list,
+    #         "startYear": int(startYear),
+    #         "endYear": int(endYear)
+    #     }
+    #     return web.json_response(json_obj)
 
-        startYear_returned = request.query.get('startYear')
-        startYear = int(startYear_returned)
-        endYear_returned = request.query.get('endYear')
-        endYear = int(endYear_returned)
-
-        json_obj = {
-            "words": word_list,
-            "startYear": int(startYear),
-            "endYear": int(endYear)
-        }
-
-        # return web.Response(content_type='html/text', body=json.dumps(json_obj))
-        # return web.Response(content_type='html/text', text=startYear_returned)
-        return web.json_response(json_obj)
-        # return web.json_response({'words': word_list, 'startYear': int(startYear), 'endYear': int(endYear)},
-                                #  status=200)
-
-    async def _serve_index(self, request):
-        return web.HTTPFound('/static/ngordnet_2a.html')
+    # async def _serve_index(self, request):
+        # return web.HTTPFound('/static/ngordnet_2a.html')
 
     def start(self):
         web.run_app(self.app, host='localhost', port=4567)
