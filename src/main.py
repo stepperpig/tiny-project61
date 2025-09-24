@@ -2,7 +2,9 @@ from aiohttp import web
 import aiohttp_cors
 import json
 from ngrams.ngrammap import NGramMap 
+import server.server_helpers
 from server.ngordnet_server import Server
+from server.ngordnet_handler import QueryHandler
 from server.ngordnet_routes import setup_routes
 
 def main():
@@ -11,7 +13,9 @@ def main():
     map = NGramMap(wfile, cfile)
 
     server = Server()
-    setup_routes(server.app) 
+    handler = QueryHandler(map)
+    server.register(handler)
+    server.setup_routes()
     server.start()
 
 main()

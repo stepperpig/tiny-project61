@@ -1,20 +1,25 @@
 from aiohttp import web
+from ngrams.ngrammap import NGramMap
+from collections import defaultdict
+from ngrams.timeseries import TimeSeries
 
 class QueryHandler:
-    def __init__(self):
+    def __init__(self, ngm):
         pass
 
-    def serve(self, filename):
-        return web.FileResponse('./static/ngordnet_2a.html')
-
-    def _strtolist(self, s):
-        requested_words = s.split(',')
-        return requested_words
-
-    async def handle(self, request):
-        data = await request.get()
-        s = data.get('words')
-        words = self._strtolist(s)
-        startYear = data.get('startYear')
-        endYear = data.get('endYear')
-        return web.Response(text=startYear)
+    async def _handle_history_text(self, request):
+        # get words
+        word_str = request.query.get('words')
+        word_list = word_str.split(',')
+        # get start and end years
+        startYear_returned = request.query.get('startYear')
+        startYear = int(startYear_returned)
+        endYear_returned = request.query.get('endYear')
+        endYear = int(endYear_returned)
+        # load into json object
+        json_obj = {
+            "words": word_list,
+            "startYear": int(startYear),
+            "endYear": int(endYear)
+        }
+        return web.json_response(json_obj)

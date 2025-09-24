@@ -5,7 +5,7 @@ import os
 import aiohttp_cors
 from pathlib import Path
 
-def setup_routes(app):
+def setup_routes(app, handler = None):
     root = _get_project_root()
     app.router.add_get('/historytext', _handle_history_text)
     app.add_routes([web.static('/', os.path.join(root, 'static/'), show_index=True)])
