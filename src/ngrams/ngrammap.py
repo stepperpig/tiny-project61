@@ -29,6 +29,10 @@ class NGramMap():
         for i in range(n):
             self.COUNTS[counts_df['year'][i]] = counts_df['total'][i]
 
+    def countHistory(self, word, startYear, endYear):
+        ts = TimeSeries()
+        
+
     def print(self):
         print(self.MAP)
 

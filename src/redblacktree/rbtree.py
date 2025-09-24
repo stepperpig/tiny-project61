@@ -136,15 +136,14 @@ class RedBlackMap:
 
     @staticmethod
     def rotate_left(node):
-        """
-        Left rotation.
-
-           x                 y
-          / \               / \
-         A   y     ===>    x   C
-            / \           / \
-           B   C         A   B
-        """
+        # """
+        # Left rotation.
+        #    x                 y
+        #   / \               / \
+        #  A   y     ===>    x   C
+        #     / \           / \
+        #    B   C         A   B
+        # """
         # Variables are named according to the picture above.
         x = node
         A = x.left
@@ -162,15 +161,15 @@ class RedBlackMap:
 
     @staticmethod
     def rotate_right(node):
-        """
-        Right rotation.
+        # """
+        # Right rotation.
 
-             x              y
-            / \            / \
-           y   C   ===>   A   x
-          / \                / \
-         A   B              B   C
-        """
+        #      x              y
+        #     / \            / \
+        #    y   C   ===>   A   x
+        #   / \                / \
+        #  A   B              B   C
+        # """
         # Variables are named according to the picture above.
         x = node
         y = x.left
@@ -222,3 +221,15 @@ class RedBlackMap:
     def __delitem__(self, key):
         """This is called when the user writes 'del bst[key]'."""
         self.remove(key)
+
+    def firstKey(self):
+        current = self.root
+        while current.left:
+            current = current.left
+        return current.key
+    
+    def lastKey(self):
+        current = self.root
+        while current.right:
+            current = current.right
+        return current.key
