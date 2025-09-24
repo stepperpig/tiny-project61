@@ -14,7 +14,7 @@ class Server():
         self.app = web.Application()
 
     def register(self, handler):
-        self.app.router.add_get('/historytext', handler._handle_history_text)
+        self.app.router.add_get('/history', handler._handle_history_text)
 
     def setup_routes(self): 
         root = Path(__file__).parent.parent

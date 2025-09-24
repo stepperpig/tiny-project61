@@ -13,7 +13,7 @@ class NGramMapTest(unittest.TestCase):
         wf = "/Users/I764248/Downloads/data/ngrams/very_short.csv"
         cf = "/Users/I764248/Downloads/data/ngrams/total_counts.csv"
 
-        ngm = NGramMap(wf, cf)
+        ngm = NGramMap(short_words_file, total_counts_file)
 
         expectedYears = [2005, 2006, 2007, 2008]
         expectedCounts = [646179.0, 677820.0, 697645.0, 795265.0]
@@ -41,7 +41,7 @@ class NGramMapTest(unittest.TestCase):
         wf = "/Users/I764248/Downloads/data/ngrams/top_14377_words.csv"
         cf = "/Users/I764248/Downloads/data/ngrams/total_counts.csv"
 
-        ngm = NGramMap(wf, cf)
+        ngm = NGramMap(top_14337_words_file, total_counts_file)
 
         fishCount = ngm.countHistory("fish", 1850, 1933)
         self.assertTrue(math.isclose(fishCount.get(1865), 136497.0, rel_tol=1e-10))

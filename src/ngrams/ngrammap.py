@@ -1,7 +1,6 @@
 from collections import defaultdict
 from ngrams.timeseries import TimeSeries
 import pandas as pd
-import pyarrow
 
 
 def custom_func(x):

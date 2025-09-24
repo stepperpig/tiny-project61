@@ -14,7 +14,7 @@ def main():
     cf = "/Users/I764248/Downloads/data/ngrams/total_counts.csv"
 
 
-    map = NGramMap(wf, cf)
+    map = NGramMap(wfile, cfile)
 
     server = Server()
     handler = QueryHandler(map)
