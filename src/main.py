@@ -1,9 +1,9 @@
-# from aiohttp import web
-# import aiohttp_cors
+from aiohttp import web
+import aiohttp_cors
 import json
 from ngrams.ngrammap import NGramMap 
-# from server.ngordnet_server import Server
-# from server.ngordnet_handler import QueryHandler
+from server.ngordnet_server import Server
+from server.ngordnet_handler import QueryHandler
 
 def main():
     wfile = "/Users/kaiwenli/Documents/projects/skeleton-sp24/data/ngrams/very_short.csv"
@@ -16,10 +16,10 @@ def main():
 
     map = NGramMap(wf, cf)
 
-    # server = Server()
-    # handler = QueryHandler(map)
-    # server.register(handler)
-    # server.setup_routes()
-    # server.start()
+    server = Server()
+    handler = QueryHandler(map)
+    server.register(handler)
+    server.setup_routes()
+    server.start()
 
 main()

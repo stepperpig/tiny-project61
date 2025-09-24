@@ -23,12 +23,11 @@ class NGramMap():
         self._parse_counts(cfile)
 
     
-
     def _parse_words(self, wfile):
         words_df = pd.read_csv(wfile, sep='\t', header=None, 
                                usecols=[0,1,2], names=['word', 'year', 'appearances'])
 
-        g = words_df.groupby(by=['word']).apply(custom_func).to_dict()
+        g = words_df.groupby('word', group_keys=False).apply(custom_func, include_groups=False).to_dict()
         self.MAP = g
         
     def _parse_counts(self, cfile):
