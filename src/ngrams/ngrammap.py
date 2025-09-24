@@ -4,7 +4,7 @@ import pandas as pd
 
 class NGramMap():
 
-    MAP = defaultdict(list)     # we'll adapt this to store TimeSeries
+    MAP = defaultdict(TimeSeries)     # we'll adapt this to store TimeSeries
     COUNTS = defaultdict(float)
 
     # yeah lets just make this as unreadable as possible why not
@@ -19,7 +19,16 @@ class NGramMap():
         # insert into MAP
         n = len(words_df['word'])
         for i in range(n):
-            self.MAP[words_df['word'][i]].append((words_df['year'][i], words_df['appearances'][i]))
+            word = words_df['word'][i]
+            year = int(words_df['year'][i])
+            appearances = float(words_df['appearances'][i])
+            if self.MAP[word] is None:
+                ts = TimeSeries()
+                ts.put(year, appearances)
+                self.MAP[word] = ts
+            else:
+                ts = self.MAP[word]
+                ts.put(year, appearances)
         
     def _parse_counts(self, cfile):
         counts_df = pd.read_csv(cfile, sep=',', header=None,
@@ -29,9 +38,71 @@ class NGramMap():
         for i in range(n):
             self.COUNTS[counts_df['year'][i]] = counts_df['total'][i]
 
-    def countHistory(self, word, startYear, endYear):
+    def countHistory(self, *args):
+        if len(args) == 1:
+            ts = TimeSeries()
+            if self.MAP.get(args[0]) is None:
+                return ts
+            ts = self.MAP.get(args[0])
+            return ts
+        else:
+            ts = TimeSeries()
+            if self.MAP.get(args[0]) is None:
+                return ts
+            ts = self.MAP.get(args[0])
+            bounded_ts = TimeSeries(ts, args[0], args[1])
+            return bounded_ts
+    
+    def totalCountHistory(self):
         ts = TimeSeries()
-        
+        for k, v in self.COUNTS:
+            ts.put(k, v)
+        return ts
+    
+    def weightHistory(self, *args):
+        if len(args) == 1:
+            ts = TimeSeries()
+            ts2 = self.totalCountHistory()
+            if self.MAP.get(args[0]) is None:
+                return ts
+            else:
+                ts = self.countHistory(args[0])
+                return ts.dividedBy(ts2)
+        else:
+            ts = TimeSeries()
+            ts2 = self.totalCountHistory()
+            if self.MAP.get(args[0]) is None:
+                return ts
+            else:
+                ts = self.countHistory(args[0], args[1], args[2])
+                bounded_ts2 = TimeSeries(ts2, args[1], args[2])
+                return ts.dividedBy(bounded_ts2)
+            
+    def summedWeightHistory(self, *args):
+        if len(args) == 1:
+            sum = TimeSeries()
+            for word in args[0]:
+                if len(self.countHistory(word)) == 0:
+                    continue
+                if len(sum) == 0:
+                    sum = self.countHistory(word)
+                else:
+                    ts = self.countHistory(word)
+                    sum = sum.plus(ts)
+            total = self.totalCountHistory()
+            return sum.dividedBy(total)
+        else:
+            sum = TimeSeries()
+            for word in args[0]:
+                if len(self.countHistory(word, args[1], args[2])) == 0:
+                    continue
+                if len(sum) == 0:
+                    sum = self.countHistory(word, args[1], args[2])
+                else:
+                    ts = self.countHistory(word, args[1], args[2])
+                    sum = sum.plus(ts)
+            total = TimeSeries(self.totalCountHistory(), args[1], args[2])
+            return sum.dividedBy(total)
 
     def print(self):
         print(self.MAP)

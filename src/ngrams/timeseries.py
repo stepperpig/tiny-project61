@@ -29,7 +29,6 @@ class TimeSeries(RedBlackMap):
         years = [] 
         for year in self:
             years.append(year)
-
         return years
 
     def data(self):
