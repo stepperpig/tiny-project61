@@ -61,9 +61,15 @@ $(function() {
             url: historytext_server,
             data: params,
             success: function(data) {
-            	console.log(`data: ${data}`)
+            	console.log(`data: ${data.words}`)
 
-                textresult.value = data;
+                res = JSON.stringify(data)
+
+                console.log(res)
+
+                textresult.value = res;
+
+
 
             },
             error: function(data) {

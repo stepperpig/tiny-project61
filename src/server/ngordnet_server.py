@@ -3,7 +3,6 @@ import json
 import aiohttp_cors
 from aiohttp.web_request import Request
 from aiohttp.web_response import Response
-from server.ngordnet_routes import setup_routes
 import os
 from pathlib import Path
 
@@ -17,6 +16,7 @@ class Server():
         self.app.router.add_get('/historytext', self._handle_history_text)
         self.app.add_routes([web.static('/', os.path.join(root, 'static/'), show_index=True)])
         self.app.router.add_get('/', self._serve_index)
+
 
         cors = aiohttp_cors.setup(self.app, defaults={
             "*": aiohttp_cors.ResourceOptions(
@@ -36,10 +36,22 @@ class Server():
         word_str = request.query.get('words')
         word_list = word_str.split(',')
 
-        startYear = request.query.get('startYear')
-        endYear = request.query.get('endYear')
-        return web.json_response({'words': word_list, 'startYear': int(startYear), 'endYear': int(endYear)},
-                                 status=200)
+        startYear_returned = request.query.get('startYear')
+        startYear = int(startYear_returned)
+        endYear_returned = request.query.get('endYear')
+        endYear = int(endYear_returned)
+
+        json_obj = {
+            "words": word_list,
+            "startYear": int(startYear),
+            "endYear": int(endYear)
+        }
+
+        # return web.Response(content_type='html/text', body=json.dumps(json_obj))
+        # return web.Response(content_type='html/text', text=startYear_returned)
+        return web.json_response(json_obj)
+        # return web.json_response({'words': word_list, 'startYear': int(startYear), 'endYear': int(endYear)},
+                                #  status=200)
 
     async def _serve_index(self, request):
         return web.HTTPFound('/static/ngordnet_2a.html')
