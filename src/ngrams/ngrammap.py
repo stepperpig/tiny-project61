@@ -5,12 +5,12 @@ import pyarrow
 
 
 def custom_func(x):
-        year_list = x['year'].tolist()
-        count_list = x['appearances'].tolist()
-        ts = TimeSeries()
-        for i in range(len(year_list)):
-            ts.put(year_list[i], count_list[i])
-        return ts
+    year_list = x['year'].tolist()
+    count_list = x['appearances'].tolist()
+    ts = TimeSeries()
+    for i in range(len(year_list)):
+        ts.put(year_list[i], count_list[i])
+    return ts
 
 class NGramMap():
 
@@ -26,7 +26,7 @@ class NGramMap():
 
     def _parse_words(self, wfile):
         words_df = pd.read_csv(wfile, sep='\t', header=None, 
-                               usecols=[0,1,2], names=['word', 'year', 'appearances'], engine="pyarrow")
+                               usecols=[0,1,2], names=['word', 'year', 'appearances'])
 
         g = words_df.groupby(by=['word']).apply(custom_func).to_dict()
         self.MAP = g
