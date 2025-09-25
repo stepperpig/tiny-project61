@@ -69,6 +69,9 @@ $(function() {
             data: params,
             success: function(data) {
             	console.log(data)
+
+                // we have to somehow return our timeseries in the form of
+                // JSON objects
                 
             },
             error: function(data) {
