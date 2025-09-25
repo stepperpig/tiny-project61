@@ -19,6 +19,18 @@ $(function() {
     const y = d3.scaleLinear()
         .domain([0, 100])
         .range([height - marginBottom, marginTop]);
+    
+    plot.attr("width", width).attr("height, height");
+
+    // Add the x-axis.
+    plot.append("g")
+        .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(d3.axisBottom(x));
+
+    // Add the y-axis.
+    plot.append("g")
+        .attr("transform", `translate(${marginLeft},0)`)
+        .call(d3.axisLeft(y));                
 
 	var host;
 
@@ -54,25 +66,12 @@ $(function() {
             data: params,
             success: function(data) {
             	console.log(data)
-                // plot.src = 'data:image/png;base64,' + data;
-                plot.attr("width", width).attr("height, height");
-
-                // Add the x-axis.
-                plot.append("g")
-                    .attr("transform", `translate(0,${height - marginBottom})`)
-                    .call(d3.axisBottom(x));
-
-                // Add the y-axis.
-                plot.append("g")
-                    .attr("transform", `translate(${marginLeft},0)`)
-                    .call(d3.axisLeft(y));                
 
             },
             error: function(data) {
             	console.log("error")
             	console.log(data);
             	// plot.src = 'data:image/png;base64,' + data;
-                plot.appendChild("<circle cx=\"100\" cy=\"75\" r=\"25\" fill=\"red\"/>")
             },
             dataType: 'json'
         });
