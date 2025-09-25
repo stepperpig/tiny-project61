@@ -9,6 +9,9 @@ $(function() {
 
     plot = d3.select("svg")
 	textresult = document.getElementById('textresult');
+
+    
+    console.log("initialized")
   
     // Declare the x (horizontal position) scale.
     const x = d3.scaleUtc()
@@ -66,7 +69,7 @@ $(function() {
             data: params,
             success: function(data) {
             	console.log(data)
-
+                
             },
             error: function(data) {
             	console.log("error")
