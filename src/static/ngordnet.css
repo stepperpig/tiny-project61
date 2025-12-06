@@ -36,7 +36,7 @@
 .btn:hover {
   box-shadow: 0 0 0px .25rem #d14836;
 }
-img, textarea {
+/* img, textarea {
   border-radius: .5rem;
   height: auto;
   transform: translateX(-50%);
@@ -44,16 +44,105 @@ img, textarea {
   left: 50%;
   position: relative;
   border: 3px solid black;
-}
+} */
 table {
   position: relative;
   transform: translateX(-50%);
   left: 50%;
 }
-input {
+/* input {
   width: calc(100% - 1rem);
   max-width: 180px;
   border: 1px solid black;
   border-radius: 3px;
   padding: .25rem;
+} */
+
+/* From Uiverse.io by ErzenXz */ 
+button {
+  width: fit-content;
+  min-width: 100px;
+  height: 45px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 2.5px solid #E0E1E4;
+  box-shadow: 0px 0px 20px -20px;
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.2s ease-in-out 0ms;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+  background-color: #F2F2F2;
+  box-shadow: 0px 0px 20px -18px;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* From Uiverse.io by reglobby */ 
+input {
+  border: 2px solid transparent;
+  width: 15em;
+  height: 2.5em;
+  padding-left: 0.8em;
+  outline: none;
+  overflow: hidden;
+  background-color: #F3F3F3;
+  border-radius: 10px;
+  transition: all 0.5s;
+}
+
+input:hover,
+input:focus {
+  border: 2px solid #4A9DEC;
+  box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+  background-color: white;
+}
+
+
+
+#top-controls {
+  border-bottom: 1px solid #ddd;
+  padding: 18px 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  background: white;
+}
+
+#top-controls .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#top-controls .btn-control {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 100px;
+}
+
+#top-controls .control {
+  flex-grow: 1;
+  max-width: 180px;
+  min-width: 110px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 6px;
+}
+
+#top-controls .control label {
+  color: #777;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+
+.svg-style {
+  display: block;
+  margin: auto;
 }

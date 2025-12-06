@@ -1,67 +1,50 @@
-
 <!DOCTYPE html>
+
 <head>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="jquery.min.js"></script>
-<script src="d3.v7.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="jquery.min.js"></script>
+    <script src="d3.v7.min.js"></script>
 
 </head>
 <link rel="stylesheet" href="ngordnet.css">
 <script src="ngordnet.js"></script>
 
 <html>
+
 <body>
 
-<p><!--<canvas id="myCanvas" width="400" height="400" style="border:1px solid #d3d3d3;">
-Your browser does not support the HTML5 canvas tag.</canvas>-->
-<svg width="640" height="400" class="plot">
-</svg>  
-    <textarea class = "textresult" id = "textresult"></textarea>
+    <div id="graph">
+        <svg width="640" height="400" class="plot">
+        </svg>
+        <textarea class="textresult" id="textresult"></textarea>
 
-</p>
+    </div>
 
-          <table>
-          <tr>
-          <td>
-	          words<br>
-	          <input type="text" id="words"><br>
-          </td>
-          <td>
-            start<br>
-            <input type="text" id="start", value="2000"><br>
-          </td>
-          <td>
-            end<br>
-            <input type="text" id="end", value="2020"><br>
-          </td>
-          <td>
-            <!--k--><br>
-            <input type="text" class = "hiddentext" id="k", value=""><br>
-          </td>          
-          </tr>
-          </table>
-<table>
-<tr>
-    <td>
-        <div class="btn" id = "history">history</div></td>
-    <td>
-        <div class="btn" id = "historytext">history (text)</div>
-    </td>
-    <!--
-    <td>
-        <div class="btn" id = "hyponyms">hyponyms</div>
-    </td>
-
-    <td>
-        <div class="btn" id = "hypohist">hypohist</div>
-    </td>
-    <td>
-        <div class="btn" id = "hypohisttext">hypohist (text)</div>
-    </td>
-    -->
-
-</tr>
-</table>
+    <div id="top-controls">
+        <div class="container l--page">
+            <div class="btn-control">
+                <button id="history">Go!</button>
+            </div>
+            <div class="control words">
+                <label for="words">Words</label>
+                <div class="input">
+                    <input type="text" id="words"/>
+                </div>
+            </div>
+            <div class="control start-year">
+                <label for="start">Start Year</label>
+                <div class="input">
+                    <input type="text" id="start" value="2000"/>
+                </div>
+            </div>
+            <div class="control end-year">
+                <label for="end">End Year</label>
+                <div class="input">
+                    <input type="text" id="end" value="2020"/>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 

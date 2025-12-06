@@ -71,7 +71,8 @@ $(function() {
                 plot.attr("width", width)
                     .attr("height", height)
                     .attr("viewBox", [0,0,width,height])
-                    .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+                    .attr("class", "svg-style")
+                    //.attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
                 // Add the x-axis.
                 plot.append("g")
