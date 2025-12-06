@@ -12,11 +12,11 @@
 }
 .btn {
   text-decoration: none;
-  color: #fff;
-  background-color: #d14836;
-  background-image: -webkit-linear-gradient(top,#dd4b39,#d14836);
-  background-image: linear-gradient(top,#dd4b39,#d14836);
-  color: #fff;
+  color: black;
+  /* background-color: #d14836; */
+  /* background-image: -webkit-linear-gradient(top,#dd4b39,#d14836); */
+  /* background-image: linear-gradient(top,#dd4b39,#d14836); */
+  /* color: #fff; */
   border: 1px solid transparent;
   text-align: center;
   letter-spacing: .5px;
@@ -31,7 +31,7 @@
   margin: .5rem 0;
   text-transform: uppercase;
   vertical-align: middle;
-  -webkit-tap-highlight-color: transparent;
+  /* -webkit-tap-highlight-color: transparent; */
 }
 .btn:hover {
   box-shadow: 0 0 0px .25rem #d14836;
